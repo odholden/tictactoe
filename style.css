@@ -1,0 +1,35 @@
+* {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    color: chartreuse;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+#gameboard {
+    border: 2px solid chartreuse;
+    width: 454px;
+    height: 454px;
+    margin: 0 auto;
+}
+
+.square {
+    border: 1px solid chartreuse;
+    height: 150px;
+    width: 150px;
+    float: left;
+    font-size: 72px;
+    vertical-align: middle;
+    padding: 32px;
+}
+
+#message {
+    margin: 40px;
+}
