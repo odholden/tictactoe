@@ -15,6 +15,22 @@ const onload = () => {
         O: []
     }
 
+    const startGame = () => {
+        $('.square').on("click", function() {
+            if(!$(this).text()) {
+                const turn = turnCount % 2 === 0 ? "X" : "O";
+                $(this).text(turn);
+                moves[turn].push($(this).index());
+                if (checkWin(moves[turn], winConditions)) {
+                    winMessage(turn);
+                } else if (turnCount === 8) {
+                    winMessage(null);
+                }
+                turnCount++;
+            } 
+        })
+    }
+
     const checkWinCondition = (movesArray, condition) => {
         return condition.every(function (value) {
             return (movesArray.indexOf(value) >= 0);
@@ -29,17 +45,28 @@ const onload = () => {
     }
 
     const winMessage = (turn) => {
-        $("#message").text(`Player ${turn} wins!`);
+        if (turn) {
+            $("#message").text(`Player ${turn} wins!`);
+        } else {
+            $("#message").text(`Draw`);
+        }
         $(".square").off();
     }
 
-    $('.square').on("click", function() {
-        const turn = turnCount % 2 === 0 ? "X" : "O";
-        $(this).text(turn);
-        moves[turn].push($(this).index());
-        if (checkWin(moves[turn], winConditions)) winMessage(turn);
-        turnCount++;
-    })
+    const reset = () =>{
+        turnCount = 0;
+        moves = {
+            X: [],
+            O: []
+        }
+        $(".square").empty();
+        $('#message').empty();
+        $('.square').off();
+        startGame();
+    }
+
+    startGame();
+    $('button').click(reset);
 }
 
 $(onload); 
